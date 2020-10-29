@@ -1,0 +1,98 @@
+function OnEvent(event, arg)
+                OutputLogMessage("event = %s, zzzz= %s\n", event, arg)
+
+                ClickLeft = 1
+                ClickRight = 2
+                AkNumber = 4
+                M16Number = 5
+                M4Number = 3
+                ScarNumber = 6
+                FireCode = "F8";
+
+           
+            -------------------------------------------------------------------------------------------------
+                function BoomAK()
+                    shotTime = 0
+                    fireCount = 0
+                    repeat
+                        if (IsMouseButtonPressed(ClickLeft)) then
+                            if shotTime>1400 then
+                                MoveMouseRelative(0.5, 6.2)
+			OutputLogMessage("1111\\d",shotTime)
+		       elseif shotTime >1000 then
+			 MoveMouseRelative(0.5, 5.3)	
+		       elseif shotTime >-1  then
+			 MoveMouseRelative(0.5,4.8)	
+                         
+                            end
+		
+                        if(fireCount % 1 == 0) then
+                            ReleaseKey(FireCode)
+                            PressKey(FireCode)
+					 OutputLogMessage("PPPPPPPPPPPPPPPPPPPPPPPPPPP\n")
+                        end
+
+                        Sleep(15)
+                        shotTime = shotTime+15
+                        fireCount = fireCount+1
+
+                        else
+                            break
+                        end
+
+                    until( not IsLeftClick )
+                    end
+
+                    function AkFunc(arg)
+                        BoomAK()
+                    end
+
+            -------------------------------------------------------------------------------------------------
+
+                if (event == "MOUSE_BUTTON_RELEASED" and arg == ClickLeft) then
+                    IsLeftClick = false
+                    ReleaseKey(FireCode)
+                end
+
+                if (event == "MOUSE_BUTTON_PRESSED" and arg == ClickLeft) then
+                    IsLeftClick = true
+                end
+
+                if (event == "MOUSE_BUTTON_RELEASED" and arg == ClickRight) then
+                    IsRightClick = false
+                end
+
+                if (event == "MOUSE_BUTTON_PRESSED" and arg == ClickRight) then
+                    IsRightClick = true
+                end
+
+                if (event == "MOUSE_BUTTON_RELEASED" and arg == AkNumber) then
+                    IsAKMClick = false
+                end
+
+                if (event == "MOUSE_BUTTON_PRESSED" and arg == AkNumber) then
+                    IsAKMClick = true
+                end
+
+                if (event == "PROFILE_ACTIVATED") then
+                    EnablePrimaryMouseButtonEvents(true)
+                elseif event == "PROFILE_DEACTIVATED" then
+                    IsLeftClick = false
+                end
+
+			if(IsRightClick) then
+				OutputLogMessage("right\n")
+			end
+			
+
+
+                if (event == "MOUSE_BUTTON_PRESSED" and arg == ClickLeft) then
+                    if (IsRightClick and (not IsAKMClick) ) then
+                        AkFunc(arg)
+   			 OutputLogMessage("AkFunc\n")
+                    else
+                        PressKey(FireCode)
+ 			OutputLogMessage("FireCode\n")
+                    end
+                end
+end
