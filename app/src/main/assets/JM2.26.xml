@@ -617,7 +617,8 @@
                             end
 
                         if(fireCount % 5 == 0) then
-                            PressAndReleaseKey(FireCode)
+                            ReleaseKey(FireCode)
+                            PressKey(FireCode)
                         end
 
                         Sleep(15)
