@@ -1,0 +1,29 @@
+function OnEvent(event, arg)
+
+ClickKey = "F8"
+startPositionX = 100
+startPositionY = 100
+endPositionOffsetX = 1000	
+
+count = 10
+
+	if(event == "MOUSE_BUTTON_RELEASED" and arg == 4) then
+		
+		PressKey("tab")
+	
+		repeat
+			OutputLogMessage("Event: "..event.." Arg: "..arg.."\n");
+			MoveMouseTo(startPositionX, startPositionY)
+			Sleep(80)
+			PressKey(ClickKey)
+			MoveMouseRelative(endPositionOffsetX, 0)
+			ReleaseKey(ClickKey)
+			Sleep(80)
+			count = count-1
+		until (count==0)
+
+		ReleaseKey("tab")
+	
+	end
+
+end
