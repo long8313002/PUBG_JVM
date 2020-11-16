@@ -1,0 +1,35 @@
+
+	
+
+function OnEvent(event, arg)
+
+	ClickKey = "F8"
+	endPositionOffsetX = 1000	
+
+	function moveX(x) 
+
+		moveX = 0
+
+		repeat 
+			moveX = moveX+20
+			MoveMouseRelative(20, 0)
+		
+		until(moveX >=x)
+
+	end
+
+
+	if(event == "MOUSE_BUTTON_RELEASED" and arg == 4) then 
+		x,y  = GetMousePosition()
+		PressKey(ClickKey)
+		moveX(endPositionOffsetX)
+		ReleaseKey(ClickKey)
+		Sleep(200)
+		cx,cy  = GetMousePosition()
+		MoveMouseRelative(x-cx, 0)
+		
+	end
+
+
+
+end
